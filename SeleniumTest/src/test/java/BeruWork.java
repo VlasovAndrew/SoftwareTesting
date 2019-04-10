@@ -1,8 +1,11 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,6 +28,7 @@ public class BeruWork {
     protected String PASSWORD = "andreyselenium";
 
     protected By loginButton = By.className("header2-nav__user");
+    protected JavascriptExecutor js;
 
     @BeforeTest
     protected void initialize() {
@@ -36,6 +40,9 @@ public class BeruWork {
         wait = new WebDriverWait(driver, 5);
         action = new Actions(driver);
     }
+
+
+
 
     protected void goOnBeruRu() {
         driver.get(address);
@@ -72,6 +79,15 @@ public class BeruWork {
         driver.get("https://beru.ru/logout?retpath=https%3A%2F%2Fberu.ru%2F%3Fncrnd%3D3877%26loggedin%3D1");
         driver.quit();
     }
-
+    protected void waitPageLoad(){
+        ExpectedCondition<Boolean> pageLoadCondition = new
+                ExpectedCondition<Boolean>() {
+                    public Boolean apply(WebDriver driver) {
+                        return ((JavascriptExecutor)driver)
+                                .executeScript("return document.readyState").equals("complete");
+                    }
+                };
+        wait.until(pageLoadCondition);
+    }
 
 }

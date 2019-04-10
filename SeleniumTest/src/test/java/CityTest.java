@@ -1,8 +1,7 @@
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
@@ -36,7 +35,7 @@ public class CityTest extends BeruWork {
         popupForm.findElement(By.className("input__control")).sendKeys(city);
         popupForm.findElement(By.className("region-suggest__list-item")).click();
         popupForm.findElement(By.className("button2")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(cityLinkID));
+        this.waitPageLoad();
     }
 
     @Step

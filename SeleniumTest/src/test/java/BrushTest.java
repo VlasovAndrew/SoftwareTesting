@@ -48,6 +48,7 @@ public class BrushTest extends BeruWork {
     private void setRange(int from, int to){
         driver.findElement(By.name("Цена от")).sendKeys(String.valueOf(from));
         driver.findElement(By.name("Цена до")).sendKeys(String.valueOf(to));
+        this.waitPageLoad();
     }
 
     @Step
@@ -79,7 +80,7 @@ public class BrushTest extends BeruWork {
         By btnID = By.className("_4qhIn2-ESi");
         WebElement neededBrush = items.get(items.size() - 2);
         neededBrush.findElement(btnID).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("В корзине")));
+        ExpectedConditions.elementToBeClickable(By.linkText("В корзине"));
     }
 
 
@@ -118,6 +119,7 @@ public class BrushTest extends BeruWork {
         By priceWindow = By.className("_1u3j_pk1db");
         while (getPriceFromString(driver.findElement(priceWindow).getText()) < x){
             btnPlus.click();
+            this.waitPageLoad();
         }
     }
 
