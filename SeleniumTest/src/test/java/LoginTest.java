@@ -1,18 +1,27 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.testng.annotations.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
+public class LoginTest extends BaseTest {
+    private MainPage mp;
 
-public class LoginTest extends BeruWork {
     @Test
-    private void firstTest() {
-        this.goOnBeruRu();
-        this.login();
-        WebElement profileButton = driver.findElement(this.loginButton);
-        Assert.assertEquals(profileButton.getText(), "Мой профиль");
-        this.logout();
+    @Description("Проверка изменения надписи на кнопке после входа в аккаунт.")
+    private void loginTest() {
+        mp = new MainPage(driver);
+        this.goIntoAccaunt();
+        this.checkCorrectButton();
     }
+
+    @Step
+    private void goIntoAccaunt(){
+        mp = mp.login();
+    }
+
+    @Step
+    private void checkCorrectButton(){
+        assertThat(this.mp.getLogitBtnText()).isEqualToIgnoringCase("Мой профиль");
+    }
+
 }

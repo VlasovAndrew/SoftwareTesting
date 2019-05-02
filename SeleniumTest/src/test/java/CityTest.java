@@ -1,58 +1,48 @@
+import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class CityTest extends BeruWork {
+public class CityTest extends BaseTest {
 
-    private By cityLinkID = By.className("link__inner");
-    @Parameters({ "city" })
-    @Test
-    private void secondTest(String city) {
-        this.goOnBeruRu();
-        this.clickCityLink();
-        this.inputDataIntoForm(city);
-        Assert.assertEquals(getCurrentCity(), city);
+    private MainPage mp;
+    private SettingPage sp;
+    private String city;
+
+    @Test(dataProvider = "city-data-provider", dataProviderClass = Options.class)
+    @Description("Проверка корректности изменения города на главной странице и в настройках.")
+    private void cityTest(String city){
+        mp = new MainPage(this.driver);
+        this.city = city;
+        this.changeCity();
+        this.checkCityAfterChanging();
         this.login();
         this.goToSettings();
-        String settingCity = this.getSettingCity();
-        Assert.assertEquals(getCurrentCity(), settingCity);
-        this.logout();
+        this.checkEqualityCityInSettings();
     }
 
     @Step
-    private void clickCityLink(){
-        driver.findElement(cityLinkID).click();
+    private void changeCity(){
+        mp = mp.setCity(city);
     }
 
     @Step
-    private void inputDataIntoForm(String city){
-        WebElement popupForm = driver.findElement(By.className("header2-region-popup"));
-        popupForm.findElement(By.className("input__control")).sendKeys(city);
-        popupForm.findElement(By.className("region-suggest__list-item")).click();
-        popupForm.findElement(By.className("button2")).click();
-        this.waitPageLoad();
+    private void checkCityAfterChanging(){
+        assertThat(mp.getCityName()).isEqualToIgnoringCase(city);
+    }
+
+    @Step
+    private void login(){
+        mp = mp.login();
     }
 
     @Step
     private void goToSettings(){
-        driver.findElement(this.loginButton).click();
-        driver.findElement(By.className("header2-user-menu__item_type_settings")).click();
+        sp = mp.clickOnSettings();
     }
 
-    private String getSettingCity(){
-        WebElement settingsForm = driver.findElement(By.className("settings-list__title"));
-        return settingsForm.findElement(cityLinkID).getText();
+    @Step
+    private void checkEqualityCityInSettings(){
+        assertThat(sp.getCityInSettings()).isEqualToIgnoringCase(sp.getCityInTopPage());
     }
-
-    private String getCurrentCity(){
-        WebElement cityLink = driver.findElement(cityLinkID);
-        return cityLink.getText();
-    }
-
-
 }

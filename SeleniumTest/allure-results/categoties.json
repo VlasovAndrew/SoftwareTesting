@@ -1,0 +1,12 @@
+[
+    
+    {
+      "name": "Ошибка в тесте",
+      "matchedStatuses": ["broken"],
+      "traceRegex": ".*FileNotFoundException.*" 
+    },
+    {
+      "name": "Ошибка в приложении",
+      "matchedStatuses": ["failed"]
+    }
+]
