@@ -6,21 +6,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MainPage extends BasePage {
 
-    @FindBy(className = "header2-nav__user")
-    private WebElement profileBtn;
-
-    @FindBy(className = "link__inner")
-    private WebElement cityLink;
-
-    @FindBy(className = "header2-user-menu__item_type_settings")
-    private WebElement settingsBtn;
-
-    @FindBy(className = "header2__navigation")
-    private WebElement catalogBtn;
-
-    @FindBy(className = "header2-menu")
-    private WebElement basketBtn;
-
     public MainPage(EventFiringWebDriver driver) {
         super(driver);
     }

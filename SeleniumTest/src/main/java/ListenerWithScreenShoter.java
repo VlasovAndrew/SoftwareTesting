@@ -7,11 +7,11 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 public class ListenerWithScreenShoter implements WebDriverEventListener{
 
     public void beforeClickOn(WebElement element, WebDriver driver) {
-        ScreenShoter.attachScreenShot(element, driver);
+        //ScreenShoter.attachScreenShot(element, driver);
     }
 
     public void beforeGetText(WebElement element, WebDriver driver) {
-        ScreenShoter.attachScreenShot(element, driver);
+        //ScreenShoter.attachScreenShot(element, driver);
     }
 
     public void beforeAlertAccept(WebDriver driver) {}

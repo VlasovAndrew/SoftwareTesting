@@ -10,10 +10,11 @@ public class ScreenShoter {
         lifecycle.addAttachment("Screenshot", "image/png", "png", data);
     }
 
-    public static void attachScreenShotOnTestFailure(WebDriver driver) {
+    public static void attachScreenShot(WebDriver driver){
         byte[] data = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
         attach(data);
     }
+
     public static void attachScreenShot(WebElement element, WebDriver driver){
         // creating frame and scroll to element
         JavascriptExecutor js = (JavascriptExecutor) driver;
