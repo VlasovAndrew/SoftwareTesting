@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,14 +35,7 @@ public class BasePage {
     @FindBy(className = "header2-user-menu__logout")
     protected WebElement logoutBtn;
 
-    public BasePage(EventFiringWebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, 5);
-        this.action = new Actions(driver);
-        PageFactory.initElements(driver, this);
-    }
-
-
+    @Step(value = "Выход тз профиля")
     protected void logout(){
         if (getLogitBtnText().equals("Мой профиль")) {
             profileBtn.click();
@@ -68,12 +62,20 @@ public class BasePage {
         return driver;
     }
 
+    @Step(value = "Получение текста из кнопки профиля")
     public String getLogitBtnText(){
         return profileBtn.getText();
     }
 
+    @Step(value = "Получение текущего города")
     public String getCityName(){
         return cityLink.getText();
     }
 
+    public BasePage(EventFiringWebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, 5);
+        this.action = new Actions(driver);
+        PageFactory.initElements(driver, this);
+    }
 }

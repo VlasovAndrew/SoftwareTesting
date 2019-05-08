@@ -1,8 +1,7 @@
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MainPage extends BasePage {
 
@@ -10,6 +9,7 @@ public class MainPage extends BasePage {
         super(driver);
     }
 
+    @Step(value = "Вход в аккаунт")
     public MainPage login(){
         profileBtn.click();
         this.inputLogin();
@@ -28,6 +28,7 @@ public class MainPage extends BasePage {
 
     }
 
+    @Step(value = "Установка города")
     public MainPage setCity(String city){
         cityLink.click();
         WebElement popupForm = driver.findElement(By.className("header2-region-popup"));
@@ -38,12 +39,14 @@ public class MainPage extends BasePage {
         return new MainPage(driver);
     }
 
+    @Step(value = "Переход в настройки")
     public SettingPage clickOnSettings(){
         this.profileBtn.click();
         this.settingsBtn.click();
         return new SettingPage(driver);
     }
 
+    @Step(value = "Переход в категории товаров")
     public ProductPage goToCategory(String mainCategory, String subcategory){
         catalogBtn.click();
         WebElement formCategory = driver.findElement(By.className("n-navigation-vertical-category"));
@@ -55,9 +58,9 @@ public class MainPage extends BasePage {
         return new ProductPage(driver);
     }
 
+    @Step(value = "Переход в корзину")
     public BasketPage goToBasket(){
         this.basketBtn.click();
         return new BasketPage(driver);
     }
-
 }

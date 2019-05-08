@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,6 +22,7 @@ public class ProductPage extends MainPage {
     @FindBy(className = "grid-snippet")
     private List<WebElement> products;
 
+    @Step(value = "Открытие всего списка товаров")
     public void openAllList(){
         try {
             int stopNumber = 1000000;
@@ -37,6 +39,7 @@ public class ProductPage extends MainPage {
         super(driver);
     }
 
+    @Step(value = "Установка диапозона стоимости товаров")
     public ProductPage setRange(int from, int to){
         priceFieldFrom.sendKeys(String.valueOf(from));
         priceFieldTo.sendKeys(String.valueOf(to));
@@ -45,6 +48,7 @@ public class ProductPage extends MainPage {
         return new ProductPage(driver);
     }
 
+    @Step(value = "Получение стоимостей товаров в списке")
     public ArrayList<Integer> getProductPrice(){
         ArrayList<Integer> result = new ArrayList<Integer>();
         for (WebElement product : products) {
@@ -54,11 +58,12 @@ public class ProductPage extends MainPage {
         return result;
     }
 
+    @Step(value = "Покупка предпоследнего товара в списке")
     public ProductPage buyPenultimate(){
         By btnID = By.className("_4qhIn2-ESi");
         WebElement product = products.get(products.size() - 2);
         product.findElement(btnID).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("В корзине")));
+        product.findElement(By.linkText("В корзине"));
         return new ProductPage(driver);
     }
 }
