@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductPage extends MainPage {
+
     @FindBy(name = "Цена от")
     private WebElement priceFieldFrom;
 
@@ -19,7 +20,6 @@ public class ProductPage extends MainPage {
 
     @FindBy(className = "grid-snippet")
     private List<WebElement> products;
-
 
     public void openAllList(){
         try {
@@ -58,8 +58,7 @@ public class ProductPage extends MainPage {
         By btnID = By.className("_4qhIn2-ESi");
         WebElement product = products.get(products.size() - 2);
         product.findElement(btnID).click();
-        ExpectedConditions.elementToBeClickable(product.findElement(btnID));
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("В корзине")));
         return new ProductPage(driver);
     }
-
 }

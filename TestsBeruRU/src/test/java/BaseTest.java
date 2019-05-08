@@ -6,13 +6,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
+@Listeners(StepWithAttachments.class)
 public class BaseTest {
 
     protected static EventFiringWebDriver driver;
@@ -23,7 +21,7 @@ public class BaseTest {
                           , "C:\\Users\\Andrew\\Desktop\\chromedriver\\chromedriver.exe");
 
         driver = new EventFiringWebDriver(new ChromeDriver());
-        driver.register(new ListenerWithScreenShoter());
+        //driver.register(new ListenerWithScreenShoter());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
@@ -45,6 +43,7 @@ public class BaseTest {
         new BasePage(driver).logout();
         driver.quit();
     }
+
     public static EventFiringWebDriver driver(){
         return driver;
     }

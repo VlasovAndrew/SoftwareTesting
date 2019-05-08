@@ -28,5 +28,4 @@ public class ScreenShoter {
         js.executeScript("arguments[0].setAttribute('style', arguments[1]);", element, "");
         attach(data);
     }
-
 }

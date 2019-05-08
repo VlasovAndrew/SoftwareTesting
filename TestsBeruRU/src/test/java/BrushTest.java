@@ -21,7 +21,7 @@ public class BrushTest extends BaseTest {
                  "Проверка бесплатной доставки после увеличения стоимости заказа.")
     private void brushTest(){
         mp = new MainPage(this.driver);
-        this.login();
+        //this.login();
         this.goToElectricToothBrush();
         this.setPriceRange();
         this.checkAllPrice();

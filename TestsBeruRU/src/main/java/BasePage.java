@@ -41,9 +41,12 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
+
     protected void logout(){
-        profileBtn.click();
-        logoutBtn.click();
+        if (getLogitBtnText().equals("Мой профиль")) {
+            profileBtn.click();
+            logoutBtn.click();
+        }
     }
 
     protected int getPriceFromString(String text){
@@ -52,18 +55,6 @@ public class BasePage {
             return 0;
         }
         return Integer.parseInt(number);
-    }
-
-
-    protected void waitPageLoad(){
-        ExpectedCondition<Boolean> pageLoadCondition = new
-                ExpectedCondition<Boolean>() {
-                    public Boolean apply(WebDriver driver) {
-                        return ((JavascriptExecutor)driver)
-                                .executeScript("return document.readyState").equals("complete");
-                    }
-                };
-        wait.until(pageLoadCondition);
     }
 
     protected void waitElementStaleness(WebElement element){
@@ -75,6 +66,14 @@ public class BasePage {
 
     public static EventFiringWebDriver driver(){
         return driver;
+    }
+
+    public String getLogitBtnText(){
+        return profileBtn.getText();
+    }
+
+    public String getCityName(){
+        return cityLink.getText();
     }
 
 }

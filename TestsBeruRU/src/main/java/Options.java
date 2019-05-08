@@ -12,7 +12,7 @@ public class Options {
         return new Object[][] {
                 { "Хвалынск" },
                 { "Волгоград" },
-                { "Москва" }
+                { "Москва" },
         };
     }
 }

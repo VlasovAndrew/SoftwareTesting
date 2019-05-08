@@ -28,13 +28,6 @@ public class MainPage extends BasePage {
 
     }
 
-    public String getLogitBtnText(){
-        return profileBtn.getText();
-    }
-    public String getCityName(){
-        return cityLink.getText();
-    }
-
     public MainPage setCity(String city){
         cityLink.click();
         WebElement popupForm = driver.findElement(By.className("header2-region-popup"));
