@@ -1,9 +1,8 @@
 BasketPage.class
 ScreenShoter.class
-ListenerWithScreenShoter.class
 ProductPage.class
 MainPage.class
 BasePage.class
-BasePage$1.class
 Options.class
+StepWithAttachments.class
 SettingPage.class

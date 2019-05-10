@@ -27,9 +27,6 @@ public class BaseTest {
 
     private void getBeru() {
         driver.get(Options.ADDRESS);
-        try {
-            driver.findElement(By.className("_1ZYDKa22GJ")).click();
-        } catch (Exception e) {}
     }
 
     @AfterMethod

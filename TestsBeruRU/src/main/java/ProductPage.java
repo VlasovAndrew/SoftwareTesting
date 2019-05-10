@@ -66,4 +66,6 @@ public class ProductPage extends MainPage {
         product.findElement(By.linkText("В корзине"));
         return new ProductPage(driver);
     }
+
+
 }

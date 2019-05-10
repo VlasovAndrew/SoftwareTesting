@@ -24,19 +24,12 @@ public class BrushTest extends BaseTest {
 
         pp = pp.buyPenultimate();
         bp = pp.goToBasket();
-        this.checkPriceInOrder();
+        bp.checkPriceInOrder();
         bp = bp.makeProductPriceMoreThenThreshold(threshold);
-        this.checkPriceInOrder();
-
+        bp.checkPriceInOrder();
         assertThat(bp.getDeliveryPrice()).isEqualTo(0);
         bp = bp.clearBasket();
     }
 
-    private void checkPriceInOrder(){
-        int totalPrice   = bp.getTotalPrice();
-        int productPrice = bp.getGoodsPrice();
-        int discount     = bp.getDiscount();
-        int delivery     = bp.getDeliveryPrice();
-        assertThat(productPrice + discount + delivery).isEqualTo(totalPrice);
-    }
+
 }

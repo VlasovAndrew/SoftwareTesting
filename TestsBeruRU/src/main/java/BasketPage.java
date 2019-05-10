@@ -7,6 +7,8 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import static org.assertj.core.api.Assertions.assertThat;
 public class BasketPage extends BasePage {
 
     @FindBy(className = "_1Q9ASvPbPN")
@@ -81,5 +83,13 @@ public class BasketPage extends BasePage {
         }
         waitElementStaleness(orderWindow);
         return new BasketPage(driver);
+    }
+    @Step(value = "Проверка корректности в заказе")
+    public void checkPriceInOrder(){
+        int totalPrice   = getTotalPrice();
+        int productPrice = getGoodsPrice();
+        int discount     = getDiscount();
+        int delivery     = getDeliveryPrice();
+        assertThat(productPrice + discount + delivery).isEqualTo(totalPrice);
     }
 }
