@@ -30,10 +30,7 @@ public class BaseTest {
     }
 
     @AfterMethod
-    protected void makeLogout(ITestResult result){
-        if (result.getStatus() == ITestResult.FAILURE){
-            ScreenShoter.attachScreenShot(driver);
-        }
+    protected void makeLogout(){
         new BasePage(driver).logout();
         driver.quit();
     }
